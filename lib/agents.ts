@@ -1,0 +1,732 @@
+export type AgentProfile = {
+  slug: string;
+  title: string;
+  tagline: string;
+  industries: string[];
+  disciplines: string[];
+  kind:
+    | "Regelagent"
+    | "Kognitiver Bot"
+    | "Predictive-ML-Agent"
+    | "LLM-Assistent"
+    | "Kontrollierter Agent"
+    | "Hybrider Agent";
+  engine: string;
+  modelStrategy: string;
+  topology: string;
+  autonomy: "A0" | "A1" | "A2" | "A3" | "A4" | "A5";
+  maturity: "R0" | "R1" | "R2" | "R3" | "R4" | "R5";
+  establishment: "G0" | "G1" | "G2" | "G3" | "G4" | "G5";
+  platformMaturity: "P0" | "P1" | "P2" | "P3" | "P4" | "P5";
+  careIntensity: "BI0" | "BI1" | "BI2" | "BI3" | "BI4";
+  evidence: "E0" | "E1" | "E2" | "E3" | "E4";
+  investment: string;
+  annualRunCost: string;
+  tco: string;
+  value: string;
+  leverage: string;
+  summary: string;
+  whyAgent: string;
+  nonAgentAlternative: string;
+  entryRequirements: string[];
+  governance: string[];
+  threeYearOutlook: string[];
+  workflow: string[];
+  allowedActions: string[];
+  prohibitedActions: string[];
+  risks: string[];
+  metrics: string[];
+  status: "Referenzprofil" | "In Recherche" | "Pilotprofil";
+  updatedAt: string;
+};
+
+export const scaleDescriptions = {
+  autonomy: {
+    A0: "Keine autonome Aktion",
+    A1: "Vorschlag ohne Ausführung",
+    A2: "Vorbereitung mit Freigabe",
+    A3: "Begrenzte Aktion mit Kontrolle",
+    A4: "Weitgehend autonom",
+    A5: "Vollautonom",
+  },
+  maturity: {
+    R0: "Hypothese",
+    R1: "Experiment",
+    R2: "Pilot",
+    R3: "Produktionsfähig",
+    R4: "Skaliert",
+    R5: "Standardisiert",
+  },
+  establishment: {
+    G0: "Nicht etabliert",
+    G1: "Einzelversuche",
+    G2: "Erste Wiederholungen",
+    G3: "Etablierte Praxis",
+    G4: "Breit industrialisiert",
+    G5: "Branchenstandard",
+  },
+  platform: {
+    P0: "Keine Plattform",
+    P1: "Sandbox",
+    P2: "Inkubationsplattform",
+    P3: "Produktionsplattform",
+    P4: "Skalierte Plattform",
+    P5: "Föderiertes Ökosystem",
+  },
+  care: {
+    BI0: "Nahezu wartungsfrei",
+    BI1: "Gering",
+    BI2: "Regelmäßig",
+    BI3: "Hoch",
+    BI4: "Dauerhafte Fach- und Technikbetreuung",
+  },
+  evidence: {
+    E0: "Redaktionelle Hypothese",
+    E1: "Plausibilisiert",
+    E2: "Pilotbeleg",
+    E3: "Produktionsbeleg",
+    E4: "Mehrfach unabhängig belegt",
+  },
+} as const;
+
+export const agents: AgentProfile[] = [
+  {
+    slug: "kyc-rechercheagent",
+    title: "KYC-Rechercheagent",
+    tagline:
+      "Sammelt Unternehmensbelege, löst Entitäten auf und bereitet eine nachvollziehbare Fallakte vor.",
+    industries: ["Banking & Finanzdienstleistungen"],
+    disciplines: ["KYC & Customer Due Diligence", "Compliance"],
+    kind: "Kontrollierter Agent",
+    engine: "Hybrid: Regeln, Entity Resolution und LLM",
+    modelStrategy: "Lokales oder kontrolliert angebundenes LLM",
+    topology: "Human-Agent-Team",
+    autonomy: "A2",
+    maturity: "R2",
+    establishment: "G2",
+    platformMaturity: "P3",
+    careIntensity: "BI3",
+    evidence: "E1",
+    investment: "180.000–450.000 €",
+    annualRunCost: "90.000–260.000 €",
+    tco: "450.000–1,23 Mio. €",
+    value: "Mehr Recherchekapazität und konsistentere Evidenz pro KYC-Fall.",
+    leverage:
+      "Hohes Fallvolumen × vermiedene Such- und Dokumentationszeit.",
+    summary:
+      "Der Agent bearbeitet keinen Kunden autonom. Er recherchiert in freigegebenen Quellen, verknüpft Entitäten, dokumentiert widersprüchliche Belege und legt das Ergebnis einem Analysten vor.",
+    whyAgent:
+      "Quellen, Suchpfade und notwendige Folgeschritte variieren je Fall. Die Auswahl bleibt jedoch durch Tool-Rechte, Datenklassen und Freigabepunkte begrenzt.",
+    nonAgentAlternative:
+      "BPMN-Workflow mit Registersuche und standardisierter Checkliste – oft die bessere Lösung bei wenigen Quellen und geringer Fallvarianz.",
+    entryRequirements: [
+      "Produktionsfähige Agenten- oder Integrationsplattform ab P3",
+      "Freigegebene Register-, Datenbank- und Dokumentenquellen",
+      "Kanonisches Kunden- und Beteiligtenmodell",
+      "Repräsentativer, anonymisierter Testfallbestand",
+      "Benannte fachliche und technische Service Owner",
+    ],
+    governance: [
+      "Analyst gibt Risikoeinstufung und Statusänderung frei",
+      "Quellen-, Prompt-, Modell- und Tool-Version werden protokolliert",
+      "Monatliche Qualitätsauswertung, ereignisbasierte Neuvalidierung",
+      "Sperr- und Rücknahmepfad für fehlerhafte Fallartefakte",
+    ],
+    threeYearOutlook: [
+      "Jahr 1: begrenzter Pilot für Recherche und Evidenzsammlung",
+      "Jahr 2: Ausbau auf weitere Kundensegmente und Quellen",
+      "Jahr 3: standardisierte Agentenfähigkeit innerhalb der KYC-Plattform",
+    ],
+    workflow: [
+      "Fall wird in Camunda, Pega oder einem Case-System eröffnet",
+      "Agent erhält nur den freigegebenen Rechercheauftrag",
+      "Quellen werden abgefragt und Belege mit Provenienz abgelegt",
+      "Analyst prüft Widersprüche, Risikoindikatoren und Empfehlung",
+      "Workflow setzt den Fall nach Freigabe fort",
+    ],
+    allowedActions: [
+      "Freigegebene Quellen durchsuchen",
+      "Dokumente klassifizieren und zusammenfassen",
+      "Entitätskandidaten und Evidenzketten vorschlagen",
+    ],
+    prohibitedActions: [
+      "Kunden ablehnen",
+      "Risiko endgültig einstufen",
+      "Datenquellen außerhalb der Freigabeliste nutzen",
+    ],
+    risks: [
+      "Falsche Entitätszuordnung",
+      "Veraltete oder unvollständige Quellen",
+      "Unbeabsichtigte Verarbeitung besonders geschützter Daten",
+    ],
+    metrics: [
+      "Recherchezeit je Fall",
+      "Anteil belegter Aussagen",
+      "Korrekturquote durch Analysten",
+      "False-Match-Rate",
+    ],
+    status: "Pilotprofil",
+    updatedAt: "25.07.2026",
+  },
+  {
+    slug: "sanktionsalarm-triage-agent",
+    title: "Sanktionsalarm-Triage-Agent",
+    tagline:
+      "Priorisiert Treffer, sammelt Vergleichsmerkmale und erklärt, warum ein Alarm geprüft werden muss.",
+    industries: ["Banking & Finanzdienstleistungen", "Handel & Logistik"],
+    disciplines: ["Sanktions-Compliance", "Financial Crime Operations"],
+    kind: "Hybrider Agent",
+    engine: "Regeln, Matching-Modelle und erklärende Sprachmodelle",
+    modelStrategy: "Open Weight oder Frontier, abhängig von Datenklasse",
+    topology: "Workflow mit kontrolliertem Agenten",
+    autonomy: "A2",
+    maturity: "R2",
+    establishment: "G2",
+    platformMaturity: "P3",
+    careIntensity: "BI4",
+    evidence: "E1",
+    investment: "250.000–650.000 €",
+    annualRunCost: "140.000–420.000 €",
+    tco: "670.000–1,91 Mio. €",
+    value:
+      "Weniger unproduktive Trefferarbeit bei unverändert menschlicher Entscheidung.",
+    leverage:
+      "Große Alarmmengen × schnellere Priorisierung ohne Absenkung der Kontrollschwelle.",
+    summary:
+      "Der Agent führt Informationen aus Listen, Kundendaten und Transaktionskontext zusammen. Er darf einen Treffer priorisieren, aber nicht endgültig schließen oder eine Zahlung freigeben.",
+    whyAgent:
+      "Die relevante Evidenz liegt über mehrere Systeme verteilt und der nächste Prüfschritt hängt vom konkreten Trefferbild ab.",
+    nonAgentAlternative:
+      "Regelbasiertes Alert Scoring plus festes Analysten-Playbook.",
+    entryRequirements: [
+      "Versionierte Sanktions- und Kundendaten",
+      "Zugriffsmodell bis auf Feldebene",
+      "Historische Entscheidungen mit belastbarer Begründung",
+      "24/7-Observability bei zahlungskritischen Prozessen",
+    ],
+    governance: [
+      "Vier-Augen-Prinzip bei jeder dispositiven Entscheidung",
+      "Keine selbstständige Trefferfreigabe",
+      "Getrennte Validierung von Matching und sprachlicher Erklärung",
+      "Drift- und Bias-Kontrollen je Namensraum und Kundensegment",
+    ],
+    threeYearOutlook: [
+      "Jahr 1: Read-only-Triage und Evidenzpaket",
+      "Jahr 2: priorisierte Arbeitskörbe und kontrollierte Nachrecherche",
+      "Jahr 3: domänenspezifische, weiterhin freigabepflichtige Workflows",
+    ],
+    workflow: [
+      "Screening-System erzeugt Alarm",
+      "Regeln und Matcher liefern Kandidaten",
+      "Agent sammelt fallbezogene Vergleichsmerkmale",
+      "Analyst entscheidet und dokumentiert",
+      "Entscheidung fließt in Evaluation, nicht automatisch ins Training",
+    ],
+    allowedActions: [
+      "Alarme priorisieren",
+      "Vergleichsmerkmale zusammenstellen",
+      "Fehlende Informationen anfordern",
+    ],
+    prohibitedActions: [
+      "Alarm endgültig schließen",
+      "Zahlung freigeben",
+      "Kundenkommunikation versenden",
+    ],
+    risks: [
+      "False Negatives durch falsche Priorisierung",
+      "Automation Bias",
+      "Unzureichende Erklärbarkeit der Einzelentscheidung",
+    ],
+    metrics: [
+      "False-Negative-Rate",
+      "Median der Bearbeitungszeit",
+      "Übersteuerungsquote",
+      "Anteil vollständiger Evidenzpakete",
+    ],
+    status: "In Recherche",
+    updatedAt: "25.07.2026",
+  },
+  {
+    slug: "regelbasierter-schadenentscheidungsagent",
+    title: "Regelbasierter Schadenentscheidungsagent",
+    tagline:
+      "Wendet freigegebene Deckungs- und Betragsregeln an – ohne LLM und mit vollständigem Entscheidungspfad.",
+    industries: ["Versicherung"],
+    disciplines: ["Schadenmanagement", "Operations"],
+    kind: "Regelagent",
+    engine: "DMN und Zustandsmaschine",
+    modelStrategy: "Kein LLM",
+    topology: "BPMN/DMN-Workflow",
+    autonomy: "A3",
+    maturity: "R4",
+    establishment: "G4",
+    platformMaturity: "P2",
+    careIntensity: "BI1",
+    evidence: "E1",
+    investment: "90.000–240.000 €",
+    annualRunCost: "35.000–90.000 €",
+    tco: "195.000–510.000 €",
+    value:
+      "Schnelle, konsistente Entscheidungen in klar definierten Standardfällen.",
+    leverage:
+      "Hoher Anteil regelklarer Fälle × vollständig automatisierbarer Entscheidungspfad.",
+    summary:
+      "Ein Agent muss nicht auf einem LLM beruhen. Dieser Typ beobachtet Ereignisse, hält Prozesszustand, wendet DMN-Regeln an und führt innerhalb fester Betrags- und Fallgrenzen Aktionen aus.",
+    whyAgent:
+      "Der Begriff Agent ist hier funktional: Das System verfolgt ein Ziel über mehrere Zustände und reagiert auf Ereignisse. Sprachliches Reasoning ist nicht erforderlich.",
+    nonAgentAlternative:
+      "Ein einfacher synchroner Regelservice, wenn kein dauerhafter Fallzustand und keine Folgeaktionen nötig sind.",
+    entryRequirements: [
+      "Explizite, testbare Entscheidungsregeln",
+      "Versionierte Produkt- und Vertragsdaten",
+      "Workflow- oder Case-Plattform ab P2",
+      "Fachlich freigegebene Testfälle und Grenzwerte",
+    ],
+    governance: [
+      "Fachliche Freigabe jeder Regelversion",
+      "Lückenlose Decision Logs",
+      "Stichproben und Grenzfallprüfung",
+      "Sofortige Deaktivierung einzelner Regelpakete",
+    ],
+    threeYearOutlook: [
+      "Jahr 1: Automatisierung eindeutiger Standardfälle",
+      "Jahr 2: mehr Produkte und Ereignistypen",
+      "Jahr 3: stabiler Shared Service mit zentraler Regelgovernance",
+    ],
+    workflow: [
+      "Schadenereignis startet den Prozess",
+      "Formale Voraussetzungen werden geprüft",
+      "DMN entscheidet innerhalb definierter Grenzen",
+      "Standardfall wird ausgeführt, Grenzfall eskaliert",
+      "Entscheidung und Regelversion werden archiviert",
+    ],
+    allowedActions: [
+      "Standardfall klassifizieren",
+      "Zahlung innerhalb eines Limits anweisen",
+      "Fehlende Pflichtdaten anfordern",
+    ],
+    prohibitedActions: [
+      "Von freigegebenen Regeln abweichen",
+      "Unklare Deckungsfälle entscheiden",
+      "Betragsgrenzen überschreiten",
+    ],
+    risks: [
+      "Fehlerhafte oder veraltete Regeln",
+      "Unbehandelte Grenzfälle",
+      "Inkonsistente Vertragsdaten",
+    ],
+    metrics: [
+      "Straight-through-Processing-Rate",
+      "Regelbedingte Korrekturen",
+      "Durchlaufzeit",
+      "Eskalationsquote",
+    ],
+    status: "Referenzprofil",
+    updatedAt: "25.07.2026",
+  },
+  {
+    slug: "kognitiver-rechnungsbot",
+    title: "Kognitiver Rechnungsbot",
+    tagline:
+      "Erkennt Dokumente, extrahiert Felder und übergibt geprüfte Buchungsdaten an einen festen Workflow.",
+    industries: ["Industrie", "Handel & Logistik", "Öffentlicher Sektor"],
+    disciplines: ["Finance Operations", "Dokumentenverarbeitung"],
+    kind: "Kognitiver Bot",
+    engine: "OCR, Dokumenten-KI und Regeln",
+    modelStrategy: "Kleine spezialisierte Modelle, kein Frontier-LLM nötig",
+    topology: "RPA/BPMN mit kognitivem Schritt",
+    autonomy: "A2",
+    maturity: "R4",
+    establishment: "G4",
+    platformMaturity: "P2",
+    careIntensity: "BI2",
+    evidence: "E1",
+    investment: "80.000–220.000 €",
+    annualRunCost: "45.000–130.000 €",
+    tco: "215.000–610.000 €",
+    value:
+      "Weniger manuelle Erfassung und schnellere, nachvollziehbare Rechnungsprüfung.",
+    leverage:
+      "Dokumentenvolumen × automatisierte Extraktion bei klarer Ausnahmebehandlung.",
+    summary:
+      "Der kognitive Bot kombiniert Wahrnehmung mit deterministischem Prozess. Er ist weder bloße RPA noch zwingend ein LLM-Agent.",
+    whyAgent:
+      "Dokumentvarianten erfordern probabilistische Erkennung; die nachgelagerte Entscheidung bleibt regelbasiert.",
+    nonAgentAlternative:
+      "Template-OCR oder Lieferantenportal bei sehr homogenen Formaten.",
+    entryRequirements: [
+      "Belegkorpus mit Ground Truth",
+      "Konten-, Lieferanten- und Bestelldaten",
+      "Definierte Konfidenzschwellen",
+      "Ausnahme-Queue mit verantwortlichen Bearbeitern",
+    ],
+    governance: [
+      "Keine Dunkelverarbeitung unterhalb der Konfidenzschwelle",
+      "Feldgenaue Qualitätsmessung",
+      "Versionierung der Extraktionsmodelle",
+      "Aufbewahrung nach Finanz- und Datenschutzvorgaben",
+    ],
+    threeYearOutlook: [
+      "Jahr 1: häufigste Belegtypen",
+      "Jahr 2: Long Tail und weitere Sprachen",
+      "Jahr 3: konsolidierter Dokumentenservice für mehrere Prozesse",
+    ],
+    workflow: [
+      "Beleg trifft ein",
+      "Dokumenttyp und Felder werden erkannt",
+      "Regeln vergleichen Bestellung, Lieferung und Rechnung",
+      "Unsichere Fälle gehen an Menschen",
+      "Freigegebene Daten werden gebucht",
+    ],
+    allowedActions: [
+      "Dokumente klassifizieren",
+      "Felder extrahieren",
+      "Vollständige Standardfälle zur Buchung übergeben",
+    ],
+    prohibitedActions: [
+      "Unsichere Beträge erraten",
+      "Lieferantenstammdaten ändern",
+      "Ausnahmefälle ohne Freigabe buchen",
+    ],
+    risks: [
+      "Vertauschte Beträge oder Konten",
+      "Manipulierte Dokumente",
+      "Schleichende Formatänderungen",
+    ],
+    metrics: [
+      "Feldgenauigkeit",
+      "Dunkelverarbeitungsquote",
+      "Nachbearbeitungszeit",
+      "Betragsgewichtete Fehlerquote",
+    ],
+    status: "Referenzprofil",
+    updatedAt: "25.07.2026",
+  },
+  {
+    slug: "vertragspruefungsassistent",
+    title: "Vertragsprüfungsassistent",
+    tagline:
+      "Vergleicht Vertragsentwürfe mit Klauselbibliothek und Playbook, ohne selbst rechtsverbindlich zu entscheiden.",
+    industries: ["Branchenübergreifend"],
+    disciplines: ["Legal", "Procurement"],
+    kind: "LLM-Assistent",
+    engine: "RAG und Sprachmodell",
+    modelStrategy: "Frontier oder privates Open-Weight-Modell",
+    topology: "Single Agent mit Human Gate",
+    autonomy: "A1",
+    maturity: "R3",
+    establishment: "G3",
+    platformMaturity: "P2",
+    careIntensity: "BI2",
+    evidence: "E1",
+    investment: "100.000–300.000 €",
+    annualRunCost: "70.000–210.000 €",
+    tco: "310.000–930.000 €",
+    value:
+      "Schnellere Erstprüfung und konsistentere Anwendung interner Verhandlungspositionen.",
+    leverage:
+      "Wiederkehrende Klauselprüfung × eingesparte Zeit qualifizierter Juristen.",
+    summary:
+      "Der Assistent markiert Abweichungen, zitiert das freigegebene Playbook und entwirft Alternativen. Die juristische Entscheidung bleibt bei einer verantwortlichen Person.",
+    whyAgent:
+      "Vertragskontext und Klauselinteraktionen erfordern sprachliche Interpretation, die sich nicht vollständig in Regeln ausdrücken lässt.",
+    nonAgentAlternative:
+      "Klauselsuche und Checkliste; bei standardisierten Verträgen häufig ausreichend.",
+    entryRequirements: [
+      "Freigegebene Klauselbibliothek und Verhandlungsleitlinien",
+      "Dokumenten- und Berechtigungskonzept",
+      "Testset mit akzeptierten und abgelehnten Abweichungen",
+      "Kennzeichnung von Rechtsordnungen und Vertragstypen",
+    ],
+    governance: [
+      "Keine autonome Vertragsfreigabe",
+      "Fundstellenpflicht für jede inhaltliche Aussage",
+      "Jede Playbook-Änderung durch Legal freigeben",
+      "Vertrauliche Dokumente nicht zum Modelltraining verwenden",
+    ],
+    threeYearOutlook: [
+      "Jahr 1: wenige Vertragstypen und Read-only-Unterstützung",
+      "Jahr 2: kontrollierte Redline-Entwürfe",
+      "Jahr 3: integrierter Legal-Operations-Service mit messbarer Qualität",
+    ],
+    workflow: [
+      "Nutzer lädt freigegebenen Entwurf",
+      "Assistent erkennt Vertragstyp und Klauseln",
+      "Abweichungen werden mit Playbook-Stellen belegt",
+      "Jurist bewertet und übernimmt Änderungen",
+      "Feedback wird kuratiert ausgewertet",
+    ],
+    allowedActions: [
+      "Klauseln vergleichen",
+      "Risiken markieren",
+      "Redline-Entwürfe vorschlagen",
+    ],
+    prohibitedActions: [
+      "Vertrag freigeben",
+      "Rechtsrat gegenüber Dritten erteilen",
+      "Vertrauliche Inhalte in unfreigegebene Dienste senden",
+    ],
+    risks: [
+      "Übersehene Klauselinteraktionen",
+      "Falsche Rechtsordnung",
+      "Unbelegte Sicherheit im Sprachstil",
+    ],
+    metrics: [
+      "Trefferquote relevanter Abweichungen",
+      "Akzeptanz vorgeschlagener Änderungen",
+      "Prüfzeit",
+      "Kritische Überseherrate",
+    ],
+    status: "Referenzprofil",
+    updatedAt: "25.07.2026",
+  },
+  {
+    slug: "predictive-maintenance-agent",
+    title: "Predictive-Maintenance-Agent",
+    tagline:
+      "Erkennt Ausfallrisiken und plant innerhalb betrieblicher Grenzen den nächsten Wartungsschritt.",
+    industries: ["Industrie", "Energie", "Transport"],
+    disciplines: ["Instandhaltung", "Operations"],
+    kind: "Predictive-ML-Agent",
+    engine: "Zeitreihenmodell, Optimierung und Zustandsmaschine",
+    modelStrategy: "Spezialisierte lokale ML-Modelle",
+    topology: "Eventgetriebener Agent",
+    autonomy: "A3",
+    maturity: "R3",
+    establishment: "G3",
+    platformMaturity: "P3",
+    careIntensity: "BI3",
+    evidence: "E1",
+    investment: "300.000–900.000 €",
+    annualRunCost: "160.000–480.000 €",
+    tco: "780.000–2,34 Mio. €",
+    value:
+      "Weniger ungeplante Stillstände und gezielterer Einsatz knapper Wartungskapazität.",
+    leverage:
+      "Vermiedene Stillstandszeit × Deckungsbeitrag kritischer Anlagen.",
+    summary:
+      "Dieser Agent beobachtet Sensordaten, prognostiziert ein Risiko und koordiniert Wartungsoptionen. Ein LLM kann Erklärungen unterstützen, ist aber nicht der Entscheidungskern.",
+    whyAgent:
+      "Zustand, Kapazitäten, Ersatzteile und Produktionsplan verändern laufend die beste nächste Aktion.",
+    nonAgentAlternative:
+      "Feste Wartungsintervalle oder reines Dashboard ohne Aktionsplanung.",
+    entryRequirements: [
+      "Ausreichend lange, qualitätsgesicherte Sensordatenreihen",
+      "Verknüpfung von Anlagen-, Störungs- und Wartungshistorie",
+      "Sichere OT/IT-Schnittstelle",
+      "Definierte Betriebs- und Sicherheitsgrenzen",
+    ],
+    governance: [
+      "Safety-relevante Eingriffe nur durch freigegebene Steuerung",
+      "Modellmonitoring je Anlagentyp",
+      "Rückfall auf feste Wartungsregeln",
+      "Änderungsfenster mit Operations und Engineering",
+    ],
+    threeYearOutlook: [
+      "Jahr 1: Shadow Mode auf ausgewählten Anlagen",
+      "Jahr 2: kontrollierte Wartungsplanung",
+      "Jahr 3: Flottenoptimierung mit standortübergreifender Governance",
+    ],
+    workflow: [
+      "Sensor- oder Zustandsereignis trifft ein",
+      "Modell schätzt Ausfallrisiko",
+      "Optimierung prüft Wartungsfenster und Ressourcen",
+      "Verantwortlicher bestätigt sicherheitsrelevante Maßnahmen",
+      "Ergebnis wird zur Modell- und Betriebsbewertung genutzt",
+    ],
+    allowedActions: [
+      "Risiken priorisieren",
+      "Wartungsfenster vorschlagen",
+      "Standardauftrag innerhalb freigegebener Grenzen anlegen",
+    ],
+    prohibitedActions: [
+      "Sicherheitssteuerung übergehen",
+      "Anlage eigenmächtig abschalten",
+      "Außerhalb trainierter Betriebsbereiche entscheiden",
+    ],
+    risks: [
+      "Sensor- und Konzeptdrift",
+      "Falsche Sicherheit bei seltenen Fehlerbildern",
+      "Kaskadeneffekte in der Produktionsplanung",
+    ],
+    metrics: [
+      "Vermiedene Stillstandszeit",
+      "Precision/Recall kritischer Warnungen",
+      "Planungsstabilität",
+      "Wartungskosten je Betriebsstunde",
+    ],
+    status: "In Recherche",
+    updatedAt: "25.07.2026",
+  },
+  {
+    slug: "software-engineering-agent",
+    title: "Software-Engineering-Agent",
+    tagline:
+      "Bearbeitet begrenzte Entwicklungsaufträge in Repository, Tests und CI – mit prüfbarem Diff statt Freitext.",
+    industries: ["Technologie", "Branchenübergreifend"],
+    disciplines: ["Software Engineering", "IT Operations"],
+    kind: "Kontrollierter Agent",
+    engine: "Frontier-LLM, Tools und Testschleife",
+    modelStrategy: "Frontier für komplexe Änderungen, lokal für Klassifikation",
+    topology: "Single Agent mit CI-Guardrails",
+    autonomy: "A3",
+    maturity: "R4",
+    establishment: "G4",
+    platformMaturity: "P2",
+    careIntensity: "BI2",
+    evidence: "E1",
+    investment: "40.000–180.000 €",
+    annualRunCost: "50.000–240.000 €",
+    tco: "190.000–900.000 €",
+    value:
+      "Kürzere Durchlaufzeiten für klar geschnittene Änderungen und technische Pflege.",
+    leverage:
+      "Viele kleine, testbare Aufgaben × verkürzte Warte- und Implementierungszeit.",
+    summary:
+      "Der Agent liest einen begrenzten Codekontext, verändert Dateien, führt Tests aus und liefert einen Review-fähigen Diff. Deployment und risikoreiche Änderungen bleiben kontrolliert.",
+    whyAgent:
+      "Die nötigen Schritte hängen vom Repositoryzustand, Testergebnis und Review-Feedback ab.",
+    nonAgentAlternative:
+      "Code-Assistent ohne Toolzugriff für Aufgaben, bei denen Änderungen immer manuell übernommen werden sollen.",
+    entryRequirements: [
+      "Versionierte Repositories und reproduzierbare Builds",
+      "Automatisierte Tests und Branch Protection",
+      "Secret Scanning und begrenzte Toolrechte",
+      "Kleine, überprüfbare Aufgabenpakete",
+    ],
+    governance: [
+      "Kein direkter Push auf geschützte Branches",
+      "Reviewpflicht nach Risikoklasse",
+      "Protokollierung von Auftrag, Diff, Tests und Modellversion",
+      "Abbruch bei unklarer Autorisierung oder Secret-Fund",
+    ],
+    threeYearOutlook: [
+      "Jahr 1: Pflege, Tests und kleine Features",
+      "Jahr 2: Teamweite Orchestrierung mit Repository-Policies",
+      "Jahr 3: agentenfähige Engineering-Plattform mit messbaren Qualitätsgrenzen",
+    ],
+    workflow: [
+      "Issue oder Auftrag definiert Ziel und Grenzen",
+      "Agent inspiziert relevanten Code",
+      "Änderung und Tests laufen in isolierter Umgebung",
+      "Mensch prüft Diff und Evidenz",
+      "CI und Repository-Policies entscheiden über Integration",
+    ],
+    allowedActions: [
+      "Dateien im Arbeitsbranch ändern",
+      "Tests und statische Analysen ausführen",
+      "Pull Request vorbereiten",
+    ],
+    prohibitedActions: [
+      "Produktions-Secrets lesen",
+      "Branch Protection umgehen",
+      "Produktivdeployment ohne Freigabe auslösen",
+    ],
+    risks: [
+      "Plausibler, aber fehlerhafter Code",
+      "Unbeabsichtigte Änderung außerhalb des Auftrags",
+      "Supply-Chain- und Secret-Risiken",
+    ],
+    metrics: [
+      "Akzeptierte Änderungen",
+      "Defects nach Merge",
+      "Reviewzeit",
+      "Kosten je abgeschlossenem Auftrag",
+    ],
+    status: "Referenzprofil",
+    updatedAt: "25.07.2026",
+  },
+  {
+    slug: "prozessausnahme-koordinator",
+    title: "Prozessausnahme-Koordinator",
+    tagline:
+      "Ordnet unklare Ausnahmen ein und übergibt sie mit Kontext an Camunda, Pega oder ein Case-System.",
+    industries: ["Branchenübergreifend"],
+    disciplines: ["Business Process Management", "Operations"],
+    kind: "Hybrider Agent",
+    engine: "BPMN/Case Management, Regeln und optionales LLM",
+    modelStrategy: "Modell nur für unstrukturierte Inhalte",
+    topology: "Workflow-Agent-Hybrid",
+    autonomy: "A2",
+    maturity: "R2",
+    establishment: "G2",
+    platformMaturity: "P3",
+    careIntensity: "BI3",
+    evidence: "E0",
+    investment: "160.000–420.000 €",
+    annualRunCost: "90.000–240.000 €",
+    tco: "430.000–1,14 Mio. €",
+    value:
+      "Weniger Liegezeit und sauberere Übergaben bei nicht standardisierten Prozessausnahmen.",
+    leverage:
+      "Ausnahmevolumen × vermiedene Koordinations- und Rückfragezeit.",
+    summary:
+      "Camunda oder Pega bleiben System of Record für Prozess und Fall. Der Agent erhält einen engen Auftrag, schlägt die nächste Behandlung vor und sendet strukturierte Ergebnisse zurück.",
+    whyAgent:
+      "Ausnahmetexte, beteiligte Systeme und sinnvolle nächste Schritte variieren, während der Prozessrahmen stabil bleibt.",
+    nonAgentAlternative:
+      "Case Queue mit festen Routingregeln und manueller Triage.",
+    entryRequirements: [
+      "Saubere BPMN-, Case- und Ereignisschnittstellen",
+      "Katalog zulässiger Aktionen und Eskalationen",
+      "Korrelations-ID über Agenten- und Prozesslauf",
+      "Gemeinsames fachliches Zustandsmodell",
+    ],
+    governance: [
+      "Prozessplattform bleibt führend für Status und Fristen",
+      "Agent darf keinen eigenen Schattenprozess etablieren",
+      "Freigabepunkte im BPMN- oder Case-Modell",
+      "End-to-End-Tracing über alle Schichten",
+    ],
+    threeYearOutlook: [
+      "Jahr 1: Read-only-Triage für einen Prozess",
+      "Jahr 2: wiederverwendbare Ausnahme-Skills",
+      "Jahr 3: zentral kontrollierter Agentenservice für mehrere Prozessdomänen",
+    ],
+    workflow: [
+      "Camunda oder Pega erzeugt einen Serviceauftrag",
+      "Agent verarbeitet nur den freigegebenen Kontext",
+      "Ergebnis kommt als schema-validiertes Ereignis zurück",
+      "Prozessregel oder Mensch entscheidet über die Fortsetzung",
+      "Korrelation und Audit bleiben in der Prozessplattform sichtbar",
+    ],
+    allowedActions: [
+      "Ausnahme klassifizieren",
+      "Kontext aus freigegebenen Systemen ergänzen",
+      "Nächsten Prozessschritt vorschlagen",
+    ],
+    prohibitedActions: [
+      "Prozessstatus außerhalb der API ändern",
+      "Fristen oder Freigaben umgehen",
+      "Eigenständigen Langzeitstatus ohne System of Record führen",
+    ],
+    risks: [
+      "Doppelter oder widersprüchlicher Zustand",
+      "Unklare Verantwortung zwischen Agent und Prozessplattform",
+      "Fehlende End-to-End-Nachvollziehbarkeit",
+    ],
+    metrics: [
+      "Liegezeit von Ausnahmen",
+      "Routinggenauigkeit",
+      "Rückfragequote",
+      "Anteil vollständig korrelierter Läufe",
+    ],
+    status: "Pilotprofil",
+    updatedAt: "25.07.2026",
+  },
+];
+
+export function getAgent(slug: string) {
+  return agents.find((agent) => agent.slug === slug);
+}
+
+export function uniqueValues(
+  key: "industries" | "disciplines" | "kind",
+): string[] {
+  const values =
+    key === "kind"
+      ? agents.map((agent) => agent.kind)
+      : agents.flatMap((agent) => agent[key]);
+
+  return [...new Set(values)].sort((a, b) => a.localeCompare(b, "de"));
+}
