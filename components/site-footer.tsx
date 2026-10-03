@@ -19,7 +19,7 @@ export function SiteFooter() {
           </a>
         </div>
         <p className="footer-license">
-          Open Source unter Apache-2.0. Profile sind Arbeitsstände, keine
+          Open Source unter Apache-2.0. Profile: CC BY-SA 4.0, Jürgen Schiller García / Fincrime Watchdog. Profile sind Arbeitsstände, keine
           Produkt- oder Rechtsberatung.
         </p>
       </div>

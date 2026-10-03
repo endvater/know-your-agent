@@ -30,8 +30,8 @@ export default function ContributePage() {
           <span>01</span>
           <h2>Profil wählen</h2>
           <p>
-            Ergänze einen vorhandenen Steckbrief oder kopiere die
-            Profilvorlage für einen neuen Agententyp.
+            Schlage einen neuen Steckbrief oder eine Korrektur als Issue
+            im öffentlichen Repo vor. Maintainer pflegen die Katalogquelle.
           </p>
         </article>
         <article>

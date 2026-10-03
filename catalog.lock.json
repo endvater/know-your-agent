@@ -1,0 +1,9 @@
+{
+  "repository": "endvater/know-your-agent-open",
+  "commit": "46198971a0ba9400ad1bf52734bfd218244f8be8",
+  "path": "app/data/catalog.json",
+  "version": "0.2.0",
+  "sha256": "143f31a16d69826175a48b5f45db187d153c75fd2bef0abb50d006264cea0f1b",
+  "source_sha256": "509b5f982b3d4be8eb227c8b65aea32374ff912aab6e62659c74304e76e6226e",
+  "content_license": "CC-BY-SA-4.0"
+}

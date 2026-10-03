@@ -48,8 +48,8 @@ npm run lint
 ## Ein Profil beitragen
 
 1. Repository forken und einen Arbeitsbranch erstellen.
-2. In `lib/agents.ts` ein vorhandenes Profil verbessern oder ein neues
-   Profil ergänzen.
+2. Ein Daten-Issue mit Quellen vorschlagen oder mit Maintainer-Zugang die
+   kanonischen YAML-Profile verbessern.
 3. Annahmen, Beobachtungen und externe Belege klar trennen.
 4. Build, Tests und Lint ausführen.
 5. Pull Request mit der Profil-Checkliste eröffnen.
@@ -82,3 +82,25 @@ Es besteht keine Verbindung oder Partnerschaft mit Naven.
 Code und Projektstruktur stehen unter der [Apache License 2.0](LICENSE).
 Beiträge dürfen nur Inhalte enthalten, die unter dieser Lizenz veröffentlicht
 werden dürfen.
+
+## Katalogquelle und reproduzierbarer Build
+
+Die App verwendet einen eingecheckten Export aus dem privaten kanonischen
+Datenrepo `endvater/know-your-agent-open`. Redaktionelle Änderungen werden dort
+in `daten/ansichten/enzyklopaedie.yaml` gepflegt. `lib/agents.ts` enthält nur
+Typen, Skalen und Zugriffsfunktionen. Die acht bisherigen Profile bleiben
+inhaltlich erhalten. Der private Berater-Datensatz wird nicht veröffentlicht.
+
+`catalog.lock.json` pinnt den Quellcommit, die Katalogversion und SHA-256.
+Ein normaler Build braucht weder GitHub-Token noch Zugriff auf das Datenrepo:
+
+```bash
+python tools/sync_catalog.py --check
+npm test
+```
+
+Maintainer importieren einen geprüften, committeten Quellstand mit
+`python tools/sync_catalog.py --source ../know-your-agent-open --update`.
+Externe Beiträge können weiterhin über Issues im öffentlichen App-Repo
+vorgeschlagen werden. Code: Apache-2.0; generierte Kataloginhalte: CC BY-SA 4.0
+mit Namensnennung Jürgen Schiller García / Fincrime Watchdog.
