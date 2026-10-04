@@ -40,3 +40,11 @@ Danke, dass du die Enzyklopädie genauer und nützlicher machst.
 
 Schreibe präzise, nüchtern und verständlich. Vermeide „revolutionär“,
 „vollautonom“, „menschengleich“ und andere unbelegte Superlative.
+
+## Datenbeiträge
+
+Die Katalogpflege erfolgt im kanonischen Datenrepo. Bearbeite keine
+generierten JSON-Dateien oder Profile in `lib/agents.ts`. Ohne Zugriff auf
+das private Quellrepo kannst du einen Änderungswunsch mit Quellen als Issue
+in diesem öffentlichen Repo einreichen. Ein Maintainer übernimmt die
+Änderung ins YAML und importiert den geprüften Release.
